@@ -4,6 +4,8 @@ const profileInfo = document.querySelector(".overview") /*Div w/ profile info */
 const repoList = document.querySelector(".repo-list"); /*Repo list */
 const allRepos = document.querySelector(".repos"); /*section of repos */
 const repoData = document.querySelector(".repo-data"); /*individual repos*/
+const btnBackToRepo = document.querySelector(".view-repos"); 
+const filterInput = document.querySelector(".filter-repos");
 
 
 
@@ -48,8 +50,9 @@ const displayRepoInfo = function(repos){
         newItem.classList.add("repo");
         newItem.innerHTML = `<h3>${repo.name}</h3>`;
         repoList.append(newItem); 
-        
+             
     }
+  
 };
 
 getGithubUserInfo();
@@ -72,11 +75,11 @@ const getSpecRepo = async function(repoName){
     for (let language in languageData){
         languages.push(language); 
     }
-    dispRepoInfo(repoInfo,languages); 
+    dispSpecRepoInfo(repoInfo,languages); 
 
 };
 
-const dispRepoInfo = function(repoInfo,languages){
+const dispSpecRepoInfo = function(repoInfo,languages){
     repoData.innerHTML="";
     const newDiv = document.createElement("div");
     newDiv.innerHTML =`<h3>Name: ${repoInfo.name}</h3>
@@ -87,9 +90,18 @@ const dispRepoInfo = function(repoInfo,languages){
     repoData.append(newDiv);
     allRepos.classList.add("hide");
     repoData.classList.remove("hide"); 
+    btnBackToRepo.classList.remove("hide");
+    
  
 };
 
+
+btnBackToRepo.addEventListener("click", function(){
+    allRepos.classList.remove("hide"); 
+    repoData.classList.add("hide"); 
+    this.classList.add("hide"); 
+
+});
 
 
 
