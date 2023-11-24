@@ -3,7 +3,7 @@ const user = "trendingUpward83";
 const profileInfo = document.querySelector(".overview") /*Div w/ profile info */
 const repoList = document.querySelector(".repo-list"); /*Repo list */
 const allRepos = document.querySelector(".repos"); /*section of repos */
-const repoData = document.querySelector(".repo-data"); /*individual repos*/
+const repoData = document.querySelector(".repo-data"); /*individual repo*/
 const btnBackToRepo = document.querySelector(".view-repos"); 
 const filterInput = document.querySelector(".filter-repos");
 
@@ -45,6 +45,7 @@ const getRepoInfo = async function () {
 };
 
 const displayRepoInfo = function(repos){
+    filterInput.classList.remove("hide");
     for (let repo of repos){
         const newItem = document.createElement("li");
         newItem.classList.add("repo");
@@ -103,6 +104,27 @@ btnBackToRepo.addEventListener("click", function(){
 
 });
 
+
+filterInput.addEventListener("input", function(e){ //this is a 'waterfall'/refining dynamic search as letters entered
+    const searchText = e.target.value; 
+    const searchableRepos = document.querySelectorAll(".repo");//should be selecting the list items with this class
+    const lowerTxt = searchText.toLowerCase();
+
+    for (let repo of searchableRepos){
+        const repoText = repo.innerText.toLowerCase();
+        
+        if (repoText.includes(lowerTxt)){
+            repo.classList.remove("hide");
+            console.log(lowerTxt); 
+        }
+        else if (!repoText.includes(lowerTxt)){
+            repo.classList.add("hide");
+        }
+ 
+    }
+    
+
+});
 
 
 
